@@ -111,4 +111,21 @@
 - Useful for manual or balancer-driven rebalancing
 
 # Determining the Primary OSD
-- CRUSH determines ordered list of OSDs
+- CRUSH determines an ordered list of OSDs
+
+- First OSD = Primary
+
+- Primary handles all client IO for PG
+
+- OSDMap promotes secondary if primary fails
+
+# Conclusion of Object Mapping and RUSH
+- Hashing maps object to PGs
+
+- CRUSH maps PGs to ideal OSD sets
+
+- OSDMap tracks actual OSDs used
+
+- pg_upmap allows fine-grained overrides
+
+- Primary OSD is first in CRUSH list
