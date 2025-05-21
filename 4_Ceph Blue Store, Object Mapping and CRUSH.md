@@ -72,3 +72,43 @@
 - Direct I/O + RocksDB = faster, more reliable that FileStore
 
 - Evolving with Ceph's ongoing development.
+
+# What is the CRUSH Map?
+- Defines topology and rules for placing data
+
+- Deterministically maps PGs to OSDs
+
+- Uses failure domains, device weights, rules
+
+# How PGs are Mapped to OSDs
+  1. Hash object -> PG
+
+  2. Apply CRUSH rule -> ideal OSD set
+ 
+  3. OSD Map checks current state -> actual acting set
+
+# Limitations of CRUSH
+- Deterministic placement causes problems:
+    - When the cluster is full
+    - When adding new hardware
+
+  # OSDMap and PG Movement
+  - CRUSH gives ideal placement
+ 
+  - OSDMap tracks real-time status of OSDs
+ 
+  - PGs move due to failures, rebalance, recovery
+ 
+  - OSDMap determines where objects actually live
+ 
+# pg_upmap/pg_upmap_items
+- Used to overried CRUSH mapping for specific PGs
+
+- pg_upmap: replace entire OSD set for a PG
+
+- pg_upmapitem: replace specific OSD(s) in the acting set
+
+- Useful for manual or balancer-driven rebalancing
+
+# Determining the Primary OSD
+- CRUSH determines ordered list of OSDs
